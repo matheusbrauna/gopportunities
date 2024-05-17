@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,10 +14,10 @@ func sendError(c *gin.Context, code int, message string) {
 	})
 }
 
-func sendSuccess(c *gin.Context, operation string, data interface{}) {
+func sendSuccess(c *gin.Context, code int, operation string, data interface{}) {
 	c.Header("Content-type", "application/json")
-	c.JSON(http.StatusOK, gin.H{
-		"message": fmt.Sprintf("operation from handler: %s", operation),
+	c.JSON(code, gin.H{
+		"message": fmt.Sprintf("operation from handler: %s successfull", operation),
 		"data":    data,
 	})
 }
