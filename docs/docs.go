@@ -27,7 +27,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Show Opening",
+                "summary": "Show opening",
                 "parameters": [
                     {
                         "type": "string",
@@ -69,7 +69,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Create Opening",
+                "summary": "Create opening",
                 "parameters": [
                     {
                         "description": "Request body",
@@ -113,7 +113,7 @@ const docTemplate = `{
                 "tags": [
                     "Openings"
                 ],
-                "summary": "Delete Opening",
+                "summary": "Delete opening",
                 "parameters": [
                     {
                         "type": "string",
@@ -138,6 +138,35 @@ const docTemplate = `{
                     },
                     "404": {
                         "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/openings": {
+            "get": {
+                "description": "List all job openings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Openings"
+                ],
+                "summary": "List openings",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.ListOpeningsResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
                         "schema": {
                             "$ref": "#/definitions/handler.ErrorResponse"
                         }
@@ -197,6 +226,20 @@ const docTemplate = `{
             "properties": {
                 "errorCode": {
                     "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.ListOpeningsResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schemas.OpeningResponse"
+                    }
                 },
                 "message": {
                     "type": "string"

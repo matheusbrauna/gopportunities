@@ -35,6 +35,15 @@ definitions:
       message:
         type: string
     type: object
+  handler.ListOpeningsResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schemas.OpeningResponse'
+        type: array
+      message:
+        type: string
+    type: object
   handler.ShowOpeningResponse:
     properties:
       data:
@@ -94,7 +103,7 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
-      summary: Delete Opening
+      summary: Delete opening
       tags:
       - Openings
     get:
@@ -122,7 +131,7 @@ paths:
           description: Not Found
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
-      summary: Show Opening
+      summary: Show opening
       tags:
       - Openings
     post:
@@ -151,7 +160,26 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/handler.ErrorResponse'
-      summary: Create Opening
+      summary: Create opening
+      tags:
+      - Openings
+  /openings:
+    get:
+      consumes:
+      - application/json
+      description: List all job openings
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.ListOpeningsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: List openings
       tags:
       - Openings
 swagger: "2.0"
